@@ -3,157 +3,216 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Latin Vocabulary Test</title>
-    <link rel="stylesheet" href="styles.css">
-    <script defer src="app.js"></script>
+    <title>Yulia Test Picker</title>
+    <style>
+      :root {
+        --ink: #172033;
+        --muted: #5d6675;
+        --line: rgba(23, 32, 51, 0.1);
+        --paper: rgba(255, 250, 242, 0.9);
+        --paper-strong: #fff7eb;
+        --french: #1f63d6;
+        --latin: #9e2f3b;
+        --shadow: 0 24px 60px rgba(23, 32, 51, 0.16);
+        --radius: 28px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        color: var(--ink);
+        font-family: "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif;
+        background:
+          radial-gradient(circle at top left, rgba(31, 99, 214, 0.16), transparent 28%),
+          radial-gradient(circle at top right, rgba(158, 47, 59, 0.18), transparent 32%),
+          linear-gradient(145deg, #f6efe4 0%, #f3e4cb 52%, #ead6c0 100%);
+      }
+
+      .shell {
+        width: min(1080px, calc(100% - 2rem));
+        margin: 0 auto;
+        padding: 2rem 0 3rem;
+      }
+
+      .hero,
+      .choice {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(10px);
+      }
+
+      .hero {
+        border-radius: 32px;
+        padding: 2rem;
+      }
+
+      .eyebrow {
+        margin: 0 0 0.65rem;
+        font-size: 0.82rem;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      h1,
+      .choice strong {
+        font-family: Baskerville, "Palatino Linotype", "Book Antiqua", serif;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2.6rem, 6vw, 4.8rem);
+        line-height: 0.94;
+      }
+
+      .hero-copy {
+        max-width: 52rem;
+        margin: 1rem 0 0;
+        font-size: 1.05rem;
+        line-height: 1.6;
+        color: var(--muted);
+      }
+
+      .choices {
+        margin-top: 1.25rem;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+      }
+
+      .choice {
+        display: block;
+        padding: 1.4rem;
+        border-radius: var(--radius);
+        text-decoration: none;
+        color: inherit;
+        transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+      }
+
+      .choice:hover {
+        transform: translateY(-2px);
+      }
+
+      .choice.french:hover {
+        border-color: rgba(31, 99, 214, 0.28);
+        background: rgba(240, 246, 255, 0.96);
+      }
+
+      .choice.latin:hover {
+        border-color: rgba(158, 47, 59, 0.26);
+        background: rgba(255, 244, 241, 0.96);
+      }
+
+      .choice-kicker {
+        display: inline-flex;
+        align-items: center;
+        margin-bottom: 0.8rem;
+        padding: 0.38rem 0.7rem;
+        border-radius: 999px;
+        font-size: 0.8rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .choice.french .choice-kicker {
+        color: var(--french);
+        background: rgba(31, 99, 214, 0.12);
+      }
+
+      .choice.latin .choice-kicker {
+        color: var(--latin);
+        background: rgba(158, 47, 59, 0.12);
+      }
+
+      .choice strong {
+        display: block;
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        line-height: 1;
+      }
+
+      .choice p {
+        margin: 0.85rem 0 0;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .meta {
+        display: block;
+        margin-top: 1rem;
+        font-size: 0.94rem;
+        font-weight: 700;
+      }
+
+      .choice.french .meta {
+        color: var(--french);
+      }
+
+      .choice.latin .meta {
+        color: var(--latin);
+      }
+
+      @media (max-width: 760px) {
+        .shell {
+          width: min(100% - 1rem, 100%);
+          padding-top: 1rem;
+        }
+
+        .hero,
+        .choice {
+          border-radius: 24px;
+        }
+
+        .hero {
+          padding: 1.25rem;
+        }
+
+        .choices {
+          grid-template-columns: 1fr;
+        }
+
+        h1 {
+          font-size: 2.6rem;
+        }
+      }
+    </style>
   </head>
   <body>
-    <div class="page-shell">
-      <header class="hero">
-        <p class="eyebrow">Year 7 Latin Revision</p>
-        <h1>Checklist 6 + 7 Test Lab</h1>
+    <main class="shell">
+      <section class="hero">
+        <p class="eyebrow">Subject Picker</p>
+        <h1>Choose The Test First</h1>
         <p class="hero-copy">
-          A simpler Latin-only test built from the two WhatsApp vocabulary sheets.
-          Progress is saved in your browser, weaker words come back more often,
-          and typing ignores macrons and most punctuation.
+          Open the French test based on the WhatsApp sheets dated March 15, 2026,
+          or open the Latin test based on the checklist sheets dated March 5, 2026.
         </p>
-      </header>
-
-      <section class="control-panel" aria-label="Quiz controls">
-        <div class="control-group">
-          <span class="control-label">Direction</span>
-          <div class="segmented" id="directionControls">
-            <button type="button" class="seg-btn" data-setting="direction" data-value="en-la">English -> Latin</button>
-            <button type="button" class="seg-btn" data-setting="direction" data-value="la-en">Latin -> English</button>
-            <button type="button" class="seg-btn" data-setting="direction" data-value="mixed">Mixed</button>
-          </div>
-        </div>
-
-        <div class="control-group">
-          <span class="control-label">Answer style</span>
-          <div class="segmented" id="answerControls">
-            <button type="button" class="seg-btn" data-setting="answerMode" data-value="typing">Typing</button>
-            <button type="button" class="seg-btn" data-setting="answerMode" data-value="multiple-choice">Multiple choice</button>
-            <button type="button" class="seg-btn" data-setting="answerMode" data-value="mixed">Mixed</button>
-          </div>
-        </div>
-
-        <div class="control-group">
-          <span class="control-label">Checklist</span>
-          <div class="segmented" id="setControls">
-            <button type="button" class="seg-btn" data-setting="setMode" data-value="all">All words</button>
-            <button type="button" class="seg-btn" data-setting="setMode" data-value="checklist-6">Checklist 6</button>
-            <button type="button" class="seg-btn" data-setting="setMode" data-value="checklist-7">Checklist 7</button>
-          </div>
-        </div>
-
-        <div class="control-group action-group">
-          <button type="button" class="ghost-btn" id="resetProgressBtn">Reset saved progress</button>
-        </div>
       </section>
 
-      <section class="stats-grid" aria-label="Progress overview">
-        <article class="stat-card">
-          <span class="stat-label">Answered</span>
-          <strong class="stat-value" id="answeredValue">0</strong>
-          <span class="stat-detail">Lifetime total</span>
-        </article>
-        <article class="stat-card">
-          <span class="stat-label">Accuracy</span>
-          <strong class="stat-value" id="accuracyValue">0%</strong>
-          <span class="stat-detail" id="accuracyDetail">No answers yet</span>
-        </article>
-        <article class="stat-card">
-          <span class="stat-label">Current streak</span>
-          <strong class="stat-value" id="streakValue">0</strong>
-          <span class="stat-detail">Correct answers in a row</span>
-        </article>
-        <article class="stat-card">
-          <span class="stat-label">Needs review</span>
-          <strong class="stat-value" id="reviewValue">0</strong>
-          <span class="stat-detail">Words with extra error weight</span>
-        </article>
+      <section class="choices" aria-label="Available tests">
+        <a class="choice french" href="french_aller_a_quiz.html">
+          <span class="choice-kicker">French</span>
+          <strong>French Test 2026-03-15</strong>
+          <p>
+            <em>aller</em> forms, places, <em>aller à</em> patterns, and the full phrases shown on the March 15 sheets.
+          </p>
+          <span class="meta">Open French quiz</span>
+        </a>
+
+        <a class="choice latin" href="latin_quiz.html">
+          <span class="choice-kicker">Latin</span>
+          <strong>Latin Test 2026-03-05</strong>
+          <p>
+            Vocabulary checklist 6 and 7 with English to Latin, Latin to English, and mixed practice.
+          </p>
+          <span class="meta">Open Latin quiz</span>
+        </a>
       </section>
-
-      <main class="workspace">
-        <section class="quiz-stage" aria-live="polite">
-          <section class="start-panel" id="startPanel">
-            <p class="start-kicker">Ready To Practise</p>
-            <h2 class="start-title">Choose the setup above, then start the Latin test.</h2>
-            <p class="start-copy">
-              This version only uses checklist 6 and checklist 7 vocabulary.
-              The first question appears after you press start, and progress stays saved on this device.
-            </p>
-            <p class="start-summary" id="startSummary"></p>
-            <div class="start-actions">
-              <button type="button" class="primary-btn" id="startBtn">Start test</button>
-              <span class="start-note">Tip: start with one checklist, then switch to mixed when it feels comfortable.</span>
-            </div>
-          </section>
-
-          <div id="quizContent" class="hidden">
-            <div class="question-header">
-              <div class="badge-row">
-                <span class="badge" id="setBadge">Checklist 6</span>
-                <span class="badge" id="directionBadge">English -> Latin</span>
-                <span class="badge" id="answerBadge">Typing</span>
-              </div>
-              <p class="prompt-label">Translate this:</p>
-              <h2 class="prompt" id="promptText">Loading...</h2>
-              <p class="prompt-hint" id="promptHint"></p>
-            </div>
-
-            <div id="typingPanel">
-              <form id="typingForm" autocomplete="off">
-                <label class="input-label" for="answerInput">Your answer</label>
-                <input id="answerInput" name="answer" type="text" spellcheck="false" autocomplete="off">
-                <div class="input-actions">
-                  <button type="submit" class="primary-btn" id="checkBtn">Check answer</button>
-                  <button type="button" class="ghost-btn" id="giveUpBtn">I give up</button>
-                </div>
-              </form>
-            </div>
-
-            <div id="multipleChoicePanel" class="hidden">
-              <div class="options-grid" id="optionsGrid"></div>
-              <div class="input-actions mc-actions">
-                <button type="button" class="ghost-btn" id="giveUpMcBtn">I give up</button>
-              </div>
-            </div>
-
-            <section id="feedbackPanel" class="feedback hidden">
-              <h3 id="feedbackTitle">Correct</h3>
-              <p id="feedbackBody"></p>
-              <p id="feedbackMeta"></p>
-            </section>
-
-            <div class="stage-actions">
-              <button type="button" class="ghost-btn" id="skipBtn">Skip</button>
-              <button type="button" class="primary-btn hidden" id="nextBtn">Next question</button>
-            </div>
-          </div>
-        </section>
-
-        <aside class="insights-panel">
-          <section class="insight-card">
-            <h3>How this test works</h3>
-            <p>
-              Missed words come back sooner. Checklist 7 verb pairs can be answered
-              with the first Latin form on its own or with both forms together.
-            </p>
-          </section>
-
-          <section class="insight-card">
-            <h3>Hardest words</h3>
-            <ol id="hardList" class="rank-list"></ol>
-          </section>
-
-          <section class="insight-card">
-            <h3>Recent misses</h3>
-            <ul id="mistakeList" class="mistake-list"></ul>
-          </section>
-        </aside>
-      </main>
-    </div>
+    </main>
   </body>
 </html>
