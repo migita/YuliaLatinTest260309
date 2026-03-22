@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>French Test 2026-03-22</title>
+  <style>
+    :root {
+      --bg: #f5f4ef;
+      --card: rgba(255, 250, 242, 0.96);
+      --text: #1f2937;
+      --muted: #667085;
+      --line: rgba(31, 41, 55, 0.12);
+      --accent: #0f766e;
+      --accent-soft: rgba(15, 118, 110, 0.12);
+      --accent-2: #c56a2d;
+      --good: #166534;
+      --good-soft: #dcfce7;
+      --bad: #b42318;
+      --bad-soft: #fee4e2;
+      --shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+      --radius: 20px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(15, 118, 110, 0.15), transparent 28%),
+        radial-gradient(circle at top right, rgba(197, 106, 45, 0.18), transparent 32%),
+        linear-gradient(145deg, #f8f4ed 0%, #f5efe5 54%, #efe4d3 100%);
+    }
+
+    .page {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 24px 16px 48px;
+    }
+
+    .hero,
+    .panel,
+    .quiz-card,
+    .stats-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero {
+      padding: 24px;
+      margin-bottom: 18px;
+    }
+
+    h1,
+    .prompt-text {
+      font-family: Baskerville, "Palatino Linotype", "Book Antiqua", serif;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(30px, 5vw, 46px);
+      line-height: 1;
+    }
+
+    .subtitle {
+      margin: 0;
+      max-width: 60rem;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.55;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.35fr 0.65fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .panel {
+      padding: 20px;
+    }
+
+    .section-title {
+      margin: 0 0 12px;
+      font-size: 20px;
+    }
+
+    .control-group {
+      margin-bottom: 18px;
+    }
+
+    .control-group label.group-label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 800;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .chips label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #fff;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .chips input {
+      margin: 0;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    button {
+      border: none;
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .secondary {
+      background: rgba(15, 118, 110, 0.08);
+      color: var(--text);
+    }
+
+    .ghost {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--line);
+    }
+
+    .stats-stack {
+      display: grid;
+      gap: 12px;
+    }
+
+    .stats-card {
+      padding: 16px;
+    }
+
+    .stats-label {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .stats-value {
+      font-size: 28px;
+      font-weight: 800;
+    }
+
+    .footer-note,
+    .small-note {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .quiz-card {
+      margin-top: 18px;
+      padding: 22px;
+    }
+
+    .quiz-topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 13px;
+      font-weight: 800;
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .prompt-label {
+      margin-bottom: 8px;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .prompt-text {
+      margin-bottom: 18px;
+      font-size: clamp(28px, 5vw, 42px);
+      font-weight: 800;
+      line-height: 1.1;
+    }
+
+    .typing-wrap {
+      display: grid;
+      gap: 12px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 16px 18px;
+      font-size: 22px;
+      border-radius: 14px;
+      border: 2px solid #d0d7e2;
+      outline: none;
+    }
+
+    input[type="text"]:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(15, 118, 110, 0.12);
+    }
+
+    .choices {
+      display: grid;
+      gap: 10px;
+    }
+
+    .choice-btn {
+      width: 100%;
+      text-align: left;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--text);
+      font-weight: 800;
+    }
+
+    .choice-btn:hover {
+      background: #faf9f4;
+    }
+
+    .feedback {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      line-height: 1.55;
+      font-size: 16px;
+      border: 1px solid transparent;
+    }
+
+    .feedback.good {
+      background: var(--good-soft);
+      color: var(--good);
+      border-color: #86efac;
+    }
+
+    .feedback.bad {
+      background: var(--bad-soft);
+      color: var(--bad);
+      border-color: #fda29b;
+    }
+
+    .feedback .answer-line {
+      margin-top: 6px;
+      font-weight: 800;
+    }
+
+    .lists {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    ul {
+      margin: 8px 0 0;
+      padding-left: 18px;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    @media (max-width: 900px) {
+      .grid,
+      .lists {
+        grid-template-columns: 1fr;
+      }
+
+      .page {
+        padding: 16px 12px 36px;
+      }
+
+      .hero,
+      .panel,
+      .quiz-card {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <h1>French Test 2026-03-22: Town + <em>Il y a</em></h1>
+      <p class="subtitle">Built from the transcribed sheets shared on March 22, 2026. It covers town places, religious buildings, directions, distance phrases, and the <em>il y a / il n'y a pas de</em> pattern. A few sentence cards combine only vocabulary taken from those sheets.</p>
+    </section>
+
+    <section class="grid">
+      <div class="panel">
+        <h2 class="section-title">Choose your test</h2>
+
+        <div class="control-group">
+          <label class="group-label">Direction</label>
+          <div class="chips">
+            <label><input type="radio" name="direction" value="eng-fr" checked> English -> French</label>
+            <label><input type="radio" name="direction" value="fr-eng"> French -> English</label>
+            <label><input type="radio" name="direction" value="mixed"> Mixed</label>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="group-label">Answer style</label>
+          <div class="chips">
+            <label><input type="radio" name="mode" value="typing" checked> Typing</label>
+            <label><input type="radio" name="mode" value="multiple-choice"> Multiple choice</label>
+            <label><input type="radio" name="mode" value="mixed"> Mixed</label>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="group-label">Topic</label>
+          <div class="chips">
+            <label><input type="radio" name="topic" value="all" checked> All</label>
+            <label><input type="radio" name="topic" value="town"> Town places</label>
+            <label><input type="radio" name="topic" value="religious"> Religious buildings</label>
+            <label><input type="radio" name="topic" value="directions"> Directions</label>
+            <label><input type="radio" name="topic" value="distance"> Distance</label>
+            <label><input type="radio" name="topic" value="grammar"> Grammar + sentences</label>
+          </div>
+        </div>
+
+        <div class="button-row">
+          <button id="startBtn" class="primary">Start test</button>
+          <button id="resetBtn" class="ghost">Reset saved progress</button>
+        </div>
+
+        <p id="startSummary" class="footer-note">Default setup: English -> French typing.</p>
+      </div>
+
+      <div class="stats-stack">
+        <div class="stats-card">
+          <div class="stats-label">Answered</div>
+          <div id="answeredStat" class="stats-value">0</div>
+        </div>
+        <div class="stats-card">
+          <div class="stats-label">Accuracy</div>
+          <div id="accuracyStat" class="stats-value">0%</div>
+        </div>
+        <div class="stats-card">
+          <div class="stats-label">Current streak</div>
+          <div id="streakStat" class="stats-value">0</div>
+        </div>
+        <div class="stats-card">
+          <div class="stats-label">Needs review</div>
+          <div id="reviewStat" class="stats-value">0</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="quizCard" class="quiz-card hidden">
+      <div class="quiz-topline">
+        <div id="setupBadge" class="badge">English -> French | Typing</div>
+        <div id="topicBadge" class="badge">All topics</div>
+      </div>
+
+      <div class="prompt-label">Translate this</div>
+      <div id="promptText" class="prompt-text">Loading...</div>
+
+      <div id="typingArea" class="typing-wrap">
+        <input id="answerInput" type="text" placeholder="Type the answer here" autocomplete="off" autocapitalize="none" spellcheck="false" />
+        <div class="button-row">
+          <button id="checkBtn" class="primary">Check answer</button>
+          <button id="giveUpBtn" class="secondary">I give up</button>
+        </div>
+      </div>
+
+      <div id="choiceArea" class="choices hidden"></div>
+      <div id="feedbackBox" class="feedback hidden"></div>
+
+      <div class="button-row hidden" id="afterAnswerRow">
+        <button id="nextBtn" class="primary">Next question</button>
+        <button id="skipBtn" class="secondary">Skip</button>
+      </div>
+
+      <div class="lists">
+        <div class="panel">
+          <h3 class="section-title">Hardest items</h3>
+          <ul id="hardList"></ul>
+        </div>
+        <div class="panel">
+          <h3 class="section-title">Recent misses</h3>
+          <ul id="missList"></ul>
+        </div>
+      </div>
+
+      <p class="footer-note">French accents are ignored, straight and curly apostrophes both work, and English answers accept standard contractions or full forms where they mean the same thing.</p>
+    </section>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "french-town-il-y-a-quiz-v1";
+    const CHOICE_COUNT = 4;
+    const RETRY_DELAY_MIN = 2;
+    const RETRY_DELAY_MAX = 3;
+    const RECENT_CARD_WINDOW = 4;
+    const RECENT_KEY_WINDOW = 8;
+    const MAX_MISTAKES = 8;
+
+    const CARDS = [
+      nounCard("town", "an aquarium", "un aquarium"),
+      nounCard("town", "a youth hostel", "une auberge de jeunesse", { extraEnglish: ["hostel"] }),
+      nounCard("town", "a bank", "une banque"),
+      nounCard("town", "a library", "une bibliothèque"),
+      nounCard("town", "a bowling alley", "un bowling", { extraEnglish: ["bowling"] }),
+      nounCard("town", "a campsite", "un camping", { extraEnglish: ["campground"] }),
+      nounCard("town", "a shopping centre", "un centre commercial", { extraEnglish: ["shopping center"] }),
+      nounCard("town", "a sports centre", "un centre sportif", { extraEnglish: ["sports center"] }),
+      nounCard("town", "a castle", "un château"),
+      nounCard("town", "a station", "une gare", { extraEnglish: ["a train station", "train station"] }),
+      nounCard("town", "the big clock tower (in La Rochelle)", "la Grosse-Horloge", {
+        bareEnglish: "big clock tower",
+        extraEnglish: ["the big clock tower", "clock tower", "the clock tower", "the big clock tower in La Rochelle", "big clock tower in La Rochelle"],
+        extraFrench: ["la grosse horloge"]
+      }),
+      nounCard("town", "a hospital", "un hôpital"),
+      nounCard("town", "a hotel", "un hôtel"),
+      nounCard("town", "a town hall", "un hôtel de ville"),
+      nounCard("town", "a shop", "un magasin", { extraEnglish: ["store"] }),
+      nounCard("town", "a market", "un marché"),
+      nounCard("town", "a museum", "un musée"),
+      nounCard("town", "a tourist office", "un office de tourisme", { extraEnglish: ["tourist information office"] }),
+      nounCard("town", "a park", "un parc"),
+      nounCard("town", "a car park", "un parking", { extraEnglish: ["parking lot"] }),
+      nounCard("town", "a skating rink", "une patinoire", { extraEnglish: ["ice rink"] }),
+      nounCard("town", "a swimming pool", "une piscine"),
+      nounCard("town", "a square", "une place", { extraEnglish: ["town square"] }),
+      nounCard("town", "a post office", "une poste", { extraEnglish: ["the post office"] }),
+      nounCard("town", "a restaurant", "un restaurant"),
+      nounCard("town", "a football pitch", "un terrain de football", { extraEnglish: ["football field", "soccer field"] }),
+      nounCard("town", "a theatre", "un théâtre", { extraEnglish: ["a theater", "theater"] }),
+      nounCard("town", "a tower", "une tour"),
+
+      nounCard("religious", "a cathedral", "une cathédrale"),
+      nounCard("religious", "a church", "une église"),
+      nounCard("religious", "a mosque", "une mosquée"),
+      nounCard("religious", "a synagogue", "une synagogue"),
+      nounCard("religious", "a temple", "un temple"),
+
+      phraseCard("directions", ["on the left", "to the left"], ["à gauche"]),
+      phraseCard("directions", ["on the right", "to the right"], ["à droite"]),
+      phraseCard("directions", ["straight on", "straight ahead"], ["tout droit"]),
+      phraseCard("directions", ["Take the first road on the left.", "Take the first street on the left."], ["Prenez la première rue à gauche."]),
+      phraseCard("directions", ["Turn to the right.", "Turn right."], ["Tournez à droite."]),
+      phraseCard("directions", ["Continue straight on.", "Continue straight ahead."], ["Continuez tout droit."]),
+
+      phraseCard("distance", ["It's very near.", "It's very close.", "It's very close by."], ["C'est tout près."]),
+      phraseCard("distance", ["It's a long way.", "It's far away.", "It's far."], ["C'est loin."]),
+      phraseCard("distance", ["It's quite a long way away.", "It's quite far away."], ["C'est assez loin."]),
+      phraseCard("distance", ["It's not far.", "It isn't far."], ["Ce n'est pas loin."]),
+      phraseCard("distance", ["It's 50 metres away.", "It's 50 meters away."], ["C'est à 50 mètres."]),
+
+      phraseCard("grammar", ["There is / There are", "There is", "There are"], ["Il y a"]),
+      phraseCard("grammar", ["There isn't / There aren't any", "There isn't", "There aren't any", "There is no", "There are no"], ["Il n'y a pas de"]),
+      phraseCard("grammar", ["There is a castle."], ["Il y a un château."]),
+      phraseCard("grammar", ["There is a swimming pool."], ["Il y a une piscine."]),
+      phraseCard("grammar", ["There are shops.", "There are some shops."], ["Il y a des magasins."]),
+      phraseCard("grammar", ["There isn't a castle.", "There is no castle."], ["Il n'y a pas de château."]),
+      phraseCard("grammar", ["There isn't a swimming pool.", "There is no swimming pool."], ["Il n'y a pas de piscine."]),
+      phraseCard("grammar", ["There aren't any shops.", "There are no shops."], ["Il n'y a pas de magasins."]),
+      phraseCard("grammar", ["In my village, there is a shop, a church and some houses."], ["Dans mon village, il y a un magasin, une église et des maisons."]),
+      phraseCard("grammar", ["There is no cinema, there is no swimming pool and there aren't any cafés.", "There isn't a cinema, there isn't a swimming pool and there aren't any cafés."], ["Il n'y a pas de cinéma, il n'y a pas de piscine et il n'y a pas de cafés."]),
+      phraseCard("grammar", ["There really isn't much.", "There really is not much."], ["Vraiment, il n'y a pas grand-chose."]),
+      phraseCard("grammar", ["In my town, there is a market and a park."], ["Dans ma ville, il y a un marché et un parc."]),
+      phraseCard("grammar", ["In my town, there is a library and a sports centre.", "In my town, there is a library and a sports center."], ["Dans ma ville, il y a une bibliothèque et un centre sportif."]),
+      phraseCard("grammar", ["In my village, there isn't a castle.", "In my village, there is no castle."], ["Dans mon village, il n'y a pas de château."]),
+      phraseCard("grammar", ["In my village, there isn't a mosque.", "In my village, there is no mosque."], ["Dans mon village, il n'y a pas de mosquée."])
+    ];
+
+    const defaultState = {
+      settings: { direction: "eng-fr", mode: "typing", topic: "all" },
+      stats: {},
+      retryQueue: [],
+      recentCards: [],
+      recentKeys: [],
+      recentMistakes: [],
+      session: { currentStreak: 0, promptCount: 0 }
+    };
+
+    const state = loadState();
+    let currentQuestion = null;
+    const els = {};
+
+    document.addEventListener("DOMContentLoaded", () => {
+      cacheEls();
+      bindControls();
+      syncControls();
+      refreshStats();
+      renderStartSummary();
+      renderLists();
+    });
+
+    function nounCard(topic, englishWithArticle, french, options = {}) {
+      const bareEnglish = options.bareEnglish || englishWithArticle.replace(/^(a|an|the)\s+/i, "");
+      return makeCard(
+        topic,
+        [englishWithArticle, bareEnglish, ...(options.extraEnglish || [])],
+        [french, ...(options.extraFrench || [])],
+        englishWithArticle,
+        french
+      );
+    }
+
+    function phraseCard(topic, englishList, frenchList) {
+      return makeCard(topic, englishList, frenchList, englishList[0], frenchList[0]);
+    }
+
+    function makeCard(topic, englishList, frenchList, englishDisplay, frenchDisplay) {
+      return {
+        id: `${topic}-${slug(frenchDisplay)}-${slug(englishDisplay)}`,
+        topic,
+        englishAnswers: unique(expandEnglishAnswers(englishList)),
+        frenchAnswers: unique(frenchList),
+        englishDisplay,
+        frenchDisplay
+      };
+    }
+
+    function cacheEls() {
+      els.startBtn = document.getElementById("startBtn");
+      els.resetBtn = document.getElementById("resetBtn");
+      els.startSummary = document.getElementById("startSummary");
+      els.quizCard = document.getElementById("quizCard");
+      els.setupBadge = document.getElementById("setupBadge");
+      els.topicBadge = document.getElementById("topicBadge");
+      els.promptText = document.getElementById("promptText");
+      els.answerInput = document.getElementById("answerInput");
+      els.checkBtn = document.getElementById("checkBtn");
+      els.giveUpBtn = document.getElementById("giveUpBtn");
+      els.choiceArea = document.getElementById("choiceArea");
+      els.typingArea = document.getElementById("typingArea");
+      els.feedbackBox = document.getElementById("feedbackBox");
+      els.afterAnswerRow = document.getElementById("afterAnswerRow");
+      els.nextBtn = document.getElementById("nextBtn");
+      els.skipBtn = document.getElementById("skipBtn");
+      els.answeredStat = document.getElementById("answeredStat");
+      els.accuracyStat = document.getElementById("accuracyStat");
+      els.streakStat = document.getElementById("streakStat");
+      els.reviewStat = document.getElementById("reviewStat");
+      els.hardList = document.getElementById("hardList");
+      els.missList = document.getElementById("missList");
+    }
+
+    function bindControls() {
+      document.querySelectorAll('input[name="direction"]').forEach((input) => {
+        input.addEventListener("change", () => {
+          state.settings.direction = input.value;
+          saveState();
+          renderStartSummary();
+        });
+      });
+
+      document.querySelectorAll('input[name="mode"]').forEach((input) => {
+        input.addEventListener("change", () => {
+          state.settings.mode = input.value;
+          saveState();
+          renderStartSummary();
+        });
+      });
+
+      document.querySelectorAll('input[name="topic"]').forEach((input) => {
+        input.addEventListener("change", () => {
+          state.settings.topic = input.value;
+          saveState();
+          renderStartSummary();
+        });
+      });
+
+      els.startBtn.addEventListener("click", startQuiz);
+      els.resetBtn.addEventListener("click", resetAllProgress);
+      els.checkBtn.addEventListener("click", () => submitTyped(els.answerInput.value));
+
+      els.answerInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          if (currentQuestion && !currentQuestion.answered) {
+            submitTyped(els.answerInput.value);
+          } else {
+            nextQuestion();
+          }
+        }
+      });
+
+      els.giveUpBtn.addEventListener("click", revealAnswer);
+      els.nextBtn.addEventListener("click", nextQuestion);
+      els.skipBtn.addEventListener("click", nextQuestion);
+
+      document.addEventListener("keydown", (event) => {
+        if (!currentQuestion || currentQuestion.answered || currentQuestion.answerMode !== "multiple-choice") {
+          return;
+        }
+
+        const index = Number(event.key) - 1;
+        if (Number.isInteger(index) && index >= 0 && index < currentQuestion.choices.length) {
+          submitChoice(currentQuestion.choices[index].value);
+        }
+      });
+    }
+
+    function syncControls() {
+      const direction = document.querySelector(`input[name="direction"][value="${state.settings.direction}"]`);
+      const mode = document.querySelector(`input[name="mode"][value="${state.settings.mode}"]`);
+      const topic = document.querySelector(`input[name="topic"][value="${state.settings.topic}"]`);
+      if (direction) direction.checked = true;
+      if (mode) mode.checked = true;
+      if (topic) topic.checked = true;
+    }
+
+    function renderStartSummary() {
+      const allStats = Object.values(state.stats);
+      const answered = sum(allStats, (entry) => entry.seen || 0);
+      const correct = sum(allStats, (entry) => entry.correct || 0);
+      const accuracy = answered ? Math.round((correct / answered) * 100) : 0;
+
+      els.startSummary.textContent = [
+        `Setup: ${labelDirection(state.settings.direction)} | ${labelMode(state.settings.mode)} | ${labelTopic(state.settings.topic)}.`,
+        answered ? `Saved progress: ${answered} answers, ${accuracy}% accuracy.` : "Saved progress: none yet."
+      ].join(" ");
+    }
+
+    function startQuiz() {
+      els.quizCard.classList.remove("hidden");
+      nextQuestion();
+    }
+
+    function nextQuestion() {
+      const card = pickCard();
+      if (!card) return;
+
+      state.session.promptCount = (state.session.promptCount || 0) + 1;
+      const direction = decideDirection();
+      const answerMode = decideAnswerMode();
+
+      currentQuestion = {
+        card,
+        direction,
+        answerMode,
+        prompt: direction === "eng-fr" ? card.englishDisplay : card.frenchDisplay,
+        acceptedAnswers: direction === "eng-fr" ? card.frenchAnswers : card.englishAnswers,
+        reveal: direction === "eng-fr" ? card.frenchDisplay : card.englishDisplay,
+        answered: false,
+        choices: answerMode === "multiple-choice" ? buildChoices(card, direction) : []
+      };
+
+      pushLimited(state.recentCards, card.id, RECENT_CARD_WINDOW);
+      saveState();
+      renderQuestion();
+    }
+
+    function renderQuestion() {
+      els.setupBadge.textContent = `${labelDirection(currentQuestion.direction)} | ${labelMode(currentQuestion.answerMode)}`;
+      els.topicBadge.textContent = labelTopic(currentQuestion.card.topic);
+      els.promptText.textContent = currentQuestion.prompt;
+      els.feedbackBox.className = "feedback hidden";
+      els.feedbackBox.innerHTML = "";
+      els.afterAnswerRow.classList.add("hidden");
+
+      if (currentQuestion.answerMode === "typing") {
+        els.typingArea.classList.remove("hidden");
+        els.choiceArea.classList.add("hidden");
+        els.answerInput.value = "";
+        els.answerInput.disabled = false;
+        els.checkBtn.disabled = false;
+        els.giveUpBtn.disabled = false;
+        requestAnimationFrame(() => els.answerInput.focus());
+        return;
+      }
+
+      els.typingArea.classList.add("hidden");
+      els.choiceArea.classList.remove("hidden");
+      renderChoices();
+    }
+
+    function renderChoices() {
+      els.choiceArea.innerHTML = "";
+
+      currentQuestion.choices.forEach((choice, index) => {
+        const button = document.createElement("button");
+        button.className = "choice-btn";
+        button.textContent = `${index + 1}. ${choice.label}`;
+        button.addEventListener("click", () => submitChoice(choice.value));
+        els.choiceArea.appendChild(button);
+      });
+
+      const giveUp = document.createElement("button");
+      giveUp.className = "secondary";
+      giveUp.textContent = "I give up";
+      giveUp.addEventListener("click", revealAnswer);
+      els.choiceArea.appendChild(giveUp);
+    }
+
+    function submitTyped(rawAnswer) {
+      if (!currentQuestion || currentQuestion.answered) return;
+      const answer = rawAnswer.trim();
+      if (!answer) return;
+      finishQuestion(isAccepted(answer, currentQuestion.acceptedAnswers, currentQuestion.direction), answer, false);
+    }
+
+    function submitChoice(value) {
+      if (!currentQuestion || currentQuestion.answered) return;
+      finishQuestion(isAccepted(value, currentQuestion.acceptedAnswers, currentQuestion.direction), value, false);
+    }
+
+    function revealAnswer() {
+      if (!currentQuestion || currentQuestion.answered) return;
+      finishQuestion(false, "", true);
+    }
+
+    function finishQuestion(correct, rawAnswer, gaveUp) {
+      currentQuestion.answered = true;
+      const entry = ensureStats(currentQuestion.card.id);
+      entry.seen += 1;
+
+      if (correct) {
+        entry.correct += 1;
+        entry.mistakes = Math.max(0, (entry.mistakes || 0) - 1);
+        state.session.currentStreak += 1;
+      } else {
+        entry.mistakes = Math.min(MAX_MISTAKES, (entry.mistakes || 0) + 1);
+        state.session.currentStreak = 0;
+        pushRecentMistake(currentQuestion.prompt, currentQuestion.reveal);
+        queueRetry(currentQuestion.card.id);
+      }
+
+      saveState();
+      refreshStats();
+      renderLists();
+      showFeedback(correct, rawAnswer, gaveUp);
+      els.afterAnswerRow.classList.remove("hidden");
+
+      if (currentQuestion.answerMode === "typing") {
+        els.answerInput.disabled = true;
+        els.checkBtn.disabled = true;
+        els.giveUpBtn.disabled = true;
+      }
+    }
+
+    function showFeedback(correct, rawAnswer, gaveUp) {
+      els.feedbackBox.classList.remove("hidden");
+      els.feedbackBox.classList.add(correct ? "good" : "bad");
+      const userLine = rawAnswer ? `<div>Your answer: <strong>${escapeHtml(rawAnswer)}</strong></div>` : "";
+      const status = correct ? "Correct" : (gaveUp ? "Answer revealed" : "Not quite");
+      els.feedbackBox.innerHTML = `
+        <div><strong>${status}</strong></div>
+        ${userLine}
+        <div class="answer-line">Correct answer: ${escapeHtml(currentQuestion.reveal)}</div>
+      `;
+    }
+
+    function refreshStats() {
+      const all = Object.values(state.stats);
+      const answered = sum(all, (item) => item.seen || 0);
+      const correct = sum(all, (item) => item.correct || 0);
+      const accuracy = answered ? Math.round((correct / answered) * 100) : 0;
+      const review = all.filter((item) => (item.mistakes || 0) > 0).length;
+
+      els.answeredStat.textContent = answered;
+      els.accuracyStat.textContent = `${accuracy}%`;
+      els.streakStat.textContent = state.session.currentStreak || 0;
+      els.reviewStat.textContent = review;
+    }
+
+    function renderLists() {
+      const hardItems = [...CARDS]
+        .map((card) => ({ card, stats: state.stats[card.id] || { mistakes: 0, seen: 0 } }))
+        .filter((item) => (item.stats.mistakes || 0) > 0)
+        .sort((left, right) => (right.stats.mistakes || 0) - (left.stats.mistakes || 0))
+        .slice(0, 6);
+
+      const misses = state.recentMistakes.slice(-6).reverse();
+
+      els.hardList.innerHTML = hardItems.length
+        ? hardItems.map(({ card, stats }) => `<li>${escapeHtml(card.englishDisplay)} -> ${escapeHtml(card.frenchDisplay)} (${stats.mistakes})</li>`).join("")
+        : "<li>No hard items yet.</li>";
+
+      els.missList.innerHTML = misses.length
+        ? misses.map((item) => `<li>${escapeHtml(item.prompt)} -> ${escapeHtml(item.answer)}</li>`).join("")
+        : "<li>No recent misses.</li>";
+    }
+
+    function pickCard() {
+      const pool = filteredCards();
+      if (!pool.length) return CARDS[0];
+
+      const promptCount = state.session.promptCount || 0;
+      const retryIndex = state.retryQueue.findIndex((item) => item && item.dueAt <= promptCount);
+
+      if (retryIndex >= 0) {
+        const [retry] = state.retryQueue.splice(retryIndex, 1);
+        const retryCard = pool.find((card) => card.id === retry.cardId) || CARDS.find((card) => card.id === retry.cardId);
+        if (retryCard) {
+          pushLimited(state.recentKeys, retryCard.id, RECENT_KEY_WINDOW);
+          return retryCard;
+        }
+      }
+
+      const weighted = [];
+
+      pool.forEach((card) => {
+        if (state.recentCards.includes(card.id)) return;
+        if (state.recentKeys.includes(card.id)) return;
+
+        const stats = state.stats[card.id] || { mistakes: 0, seen: 0 };
+        const weight = 1 + (stats.mistakes || 0) * 3 + ((stats.seen || 0) === 0 ? 2 : 0);
+        for (let i = 0; i < weight; i += 1) {
+          weighted.push(card);
+        }
+      });
+
+      const fallback = weighted.length ? weighted : pool;
+      const card = fallback[Math.floor(Math.random() * fallback.length)];
+      pushLimited(state.recentKeys, card.id, RECENT_KEY_WINDOW);
+      return card;
+    }
+
+    function filteredCards() {
+      return state.settings.topic === "all"
+        ? CARDS
+        : CARDS.filter((card) => card.topic === state.settings.topic);
+    }
+
+    function decideDirection() {
+      if (state.settings.direction !== "mixed") return state.settings.direction;
+      return Math.random() < 0.75 ? "eng-fr" : "fr-eng";
+    }
+
+    function decideAnswerMode() {
+      if (state.settings.mode !== "mixed") return state.settings.mode;
+      return Math.random() < 0.75 ? "typing" : "multiple-choice";
+    }
+
+    function buildChoices(card, direction) {
+      const correctLabel = direction === "eng-fr" ? card.frenchDisplay : card.englishDisplay;
+      const correctValue = direction === "eng-fr" ? card.frenchAnswers[0] : card.englishAnswers[0];
+      const otherPool = filteredCards()
+        .filter((item) => item.id !== card.id)
+        .map((item) => direction === "eng-fr"
+          ? { label: item.frenchDisplay, value: item.frenchAnswers[0] }
+          : { label: item.englishDisplay, value: item.englishAnswers[0] }
+        );
+
+      shuffle(otherPool);
+
+      const selected = [{ label: correctLabel, value: correctValue }];
+      for (const item of otherPool) {
+        if (selected.length >= CHOICE_COUNT) break;
+        if (!selected.some((entry) => normalizeLoose(entry.label) === normalizeLoose(item.label))) {
+          selected.push(item);
+        }
+      }
+
+      return shuffle(selected);
+    }
+
+    function isAccepted(answer, acceptedList, direction) {
+      if (direction !== "eng-fr") {
+        const normalizedAnswer = normalizeEnglish(answer);
+        return acceptedList.some((item) => normalizedAnswer === normalizeEnglish(item));
+      }
+
+      const normalizedAnswer = normalizeFrench(answer);
+      const compactAnswer = compactFrench(normalizedAnswer);
+
+      return acceptedList.some((item) => {
+        const normalizedItem = normalizeFrench(item);
+        return normalizedAnswer === normalizedItem || compactAnswer === compactFrench(normalizedItem);
+      });
+    }
+
+    function normalizeFrench(value) {
+      return value.toLowerCase()
+        .replace(/[’]/g, "'")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/œ/g, "oe")
+        .replace(/[^a-z0-9' ]+/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function compactFrench(value) {
+      return value.replace(/[' ]+/g, "");
+    }
+
+    function normalizeEnglish(value) {
+      return value.toLowerCase()
+        .replace(/[’]/g, "'")
+        .replace(/[^a-z0-9' ]+/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function pushRecentMistake(prompt, answer) {
+      state.recentMistakes.push({ prompt, answer });
+      if (state.recentMistakes.length > 12) {
+        state.recentMistakes = state.recentMistakes.slice(-12);
+      }
+    }
+
+    function queueRetry(cardId) {
+      const gap = RETRY_DELAY_MIN + Math.floor(Math.random() * (RETRY_DELAY_MAX - RETRY_DELAY_MIN + 1));
+      state.retryQueue.push({ cardId, dueAt: (state.session.promptCount || 0) + gap });
+      if (state.retryQueue.length > 24) {
+        state.retryQueue = state.retryQueue.slice(-24);
+      }
+    }
+
+    function ensureStats(cardId) {
+      if (!state.stats[cardId]) {
+        state.stats[cardId] = { seen: 0, correct: 0, mistakes: 0 };
+      }
+      return state.stats[cardId];
+    }
+
+    function resetAllProgress() {
+      if (!window.confirm("Reset all saved quiz progress for this page?")) return;
+      localStorage.removeItem(STORAGE_KEY);
+      window.location.reload();
+    }
+
+    function labelDirection(value) {
+      if (value === "eng-fr") return "English -> French";
+      if (value === "fr-eng") return "French -> English";
+      return "Mixed";
+    }
+
+    function labelMode(value) {
+      if (value === "multiple-choice") return "Multiple choice";
+      if (value === "mixed") return "Mixed";
+      return "Typing";
+    }
+
+    function labelTopic(value) {
+      if (value === "town") return "Town places";
+      if (value === "religious") return "Religious buildings";
+      if (value === "directions") return "Directions";
+      if (value === "distance") return "Distance";
+      if (value === "grammar") return "Grammar + sentences";
+      return "All topics";
+    }
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return deepCopy(defaultState);
+        const parsed = JSON.parse(raw);
+        return {
+          ...deepCopy(defaultState),
+          ...parsed,
+          settings: { ...deepCopy(defaultState).settings, ...(parsed.settings || {}) },
+          session: { ...deepCopy(defaultState).session, ...(parsed.session || {}) },
+          stats: parsed.stats || {},
+          retryQueue: Array.isArray(parsed.retryQueue) ? parsed.retryQueue : [],
+          recentCards: Array.isArray(parsed.recentCards) ? parsed.recentCards : [],
+          recentKeys: Array.isArray(parsed.recentKeys) ? parsed.recentKeys : [],
+          recentMistakes: Array.isArray(parsed.recentMistakes) ? parsed.recentMistakes : []
+        };
+      } catch (_error) {
+        return deepCopy(defaultState);
+      }
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (_error) {
+        // Ignore storage failures so the quiz still works.
+      }
+    }
+
+    function expandEnglishAnswers(list) {
+      return list.flatMap((item) => englishVariants(item));
+    }
+
+    function englishVariants(value) {
+      const seen = new Set([value]);
+      const queue = [value];
+
+      while (queue.length) {
+        const current = queue.pop();
+        const nextValues = [
+          current.replace(/\bIt's\b/g, "It is").replace(/\bit's\b/g, "it is"),
+          current.replace(/\bThere's\b/g, "There is").replace(/\bthere's\b/g, "there is"),
+          current.replace(/\bIsn't\b/g, "Is not").replace(/\bisn't\b/g, "is not"),
+          current.replace(/\bAren't\b/g, "Are not").replace(/\baren't\b/g, "are not"),
+          current.replace(/\bDon't\b/g, "Do not").replace(/\bdon't\b/g, "do not")
+        ];
+
+        nextValues.forEach((next) => {
+          if (next !== current && !seen.has(next)) {
+            seen.add(next);
+            queue.push(next);
+          }
+        });
+      }
+
+      return [...seen];
+    }
+
+    function deepCopy(value) { return JSON.parse(JSON.stringify(value)); }
+    function sum(arr, fn) { return arr.reduce((total, item) => total + fn(item), 0); }
+    function unique(arr) { return [...new Set(arr)]; }
+    function slug(value) { return normalizeLoose(value).replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); }
+    function normalizeLoose(value) {
+      return value.toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[’]/g, "'")
+        .trim();
+    }
+    function pushLimited(arr, value, limit) {
+      arr.push(value);
+      while (arr.length > limit) arr.shift();
+    }
+    function shuffle(arr) {
+      const copy = [...arr];
+      for (let i = copy.length - 1; i > 0; i -= 1) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+    function escapeHtml(value) {
+      return value
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+  </script>
+</body>
+</html>

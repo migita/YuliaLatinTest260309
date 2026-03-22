@@ -82,7 +82,7 @@
       .choices {
         margin-top: 1.25rem;
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 1rem;
       }
 
@@ -158,6 +158,12 @@
         color: var(--latin);
       }
 
+      @media (max-width: 980px) {
+        .choices {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
       @media (max-width: 760px) {
         .shell {
           width: min(100% - 1rem, 100%);
@@ -189,8 +195,8 @@
         <p class="eyebrow">Subject Picker</p>
         <h1>Choose The Test First</h1>
         <p class="hero-copy">
-          Open the French test based on the WhatsApp sheets dated March 15, 2026,
-          or open the Latin test based on the checklist sheets dated March 5, 2026.
+          Open one of two French tests based on the March 15 and March 22, 2026
+          sheet sets, or open the Latin test based on the checklist sheets dated March 5, 2026.
         </p>
       </section>
 
@@ -200,6 +206,16 @@
           <strong>French Test 2026-03-15</strong>
           <p>
             <em>aller</em> forms, places, <em>aller à</em> patterns, and the full phrases shown on the March 15 sheets.
+          </p>
+          <span class="meta">Open French quiz</span>
+        </a>
+
+        <a class="choice french" href="french_town_il_y_a_quiz.html">
+          <span class="choice-kicker">French</span>
+          <strong>French Test 2026-03-22</strong>
+          <p>
+            Town places, religious buildings, directions, distance phrases, and
+            <em>il y a / il n'y a pas de</em> practice from the March 22 sheets.
           </p>
           <span class="meta">Open French quiz</span>
         </a>
