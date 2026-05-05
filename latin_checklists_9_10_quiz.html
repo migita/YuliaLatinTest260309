@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latin Vocabulary Test 2026-05-05</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="latin_checklists_9_10_app.js"></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <p class="eyebrow">Year 7 Latin Revision</p>
+        <h1>Checklist 9 + 10 Test Lab</h1>
+        <p class="hero-copy">
+          A Latin-only test built from the WhatsApp vocabulary sheets dated May 5, 2026.
+          Progress is saved in your browser, weaker words come back more often,
+          and typing ignores macrons and most punctuation.
+        </p>
+      </header>
+
+      <section class="control-panel" aria-label="Quiz controls">
+        <div class="control-group">
+          <span class="control-label">Direction</span>
+          <div class="segmented" id="directionControls">
+            <button type="button" class="seg-btn" data-setting="direction" data-value="en-la">English -> Latin</button>
+            <button type="button" class="seg-btn" data-setting="direction" data-value="la-en">Latin -> English</button>
+            <button type="button" class="seg-btn" data-setting="direction" data-value="mixed">Mixed</button>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <span class="control-label">Answer style</span>
+          <div class="segmented" id="answerControls">
+            <button type="button" class="seg-btn" data-setting="answerMode" data-value="typing">Typing</button>
+            <button type="button" class="seg-btn" data-setting="answerMode" data-value="multiple-choice">Multiple choice</button>
+            <button type="button" class="seg-btn" data-setting="answerMode" data-value="mixed">Mixed</button>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <span class="control-label">Checklist</span>
+          <div class="segmented" id="setControls">
+            <button type="button" class="seg-btn" data-setting="setMode" data-value="all">All words</button>
+            <button type="button" class="seg-btn" data-setting="setMode" data-value="checklist-9">Checklist 9</button>
+            <button type="button" class="seg-btn" data-setting="setMode" data-value="checklist-10">Checklist 10</button>
+          </div>
+        </div>
+
+        <div class="control-group action-group">
+          <button type="button" class="ghost-btn" id="resetProgressBtn">Reset saved progress</button>
+        </div>
+      </section>
+
+      <section class="stats-grid" aria-label="Progress overview">
+        <article class="stat-card">
+          <span class="stat-label">Answered</span>
+          <strong class="stat-value" id="answeredValue">0</strong>
+          <span class="stat-detail">Lifetime total</span>
+        </article>
+        <article class="stat-card">
+          <span class="stat-label">Accuracy</span>
+          <strong class="stat-value" id="accuracyValue">0%</strong>
+          <span class="stat-detail" id="accuracyDetail">No answers yet</span>
+        </article>
+        <article class="stat-card">
+          <span class="stat-label">Current streak</span>
+          <strong class="stat-value" id="streakValue">0</strong>
+          <span class="stat-detail">Correct answers in a row</span>
+        </article>
+        <article class="stat-card">
+          <span class="stat-label">Needs review</span>
+          <strong class="stat-value" id="reviewValue">0</strong>
+          <span class="stat-detail">Words with extra error weight</span>
+        </article>
+      </section>
+
+      <main class="workspace">
+        <section class="quiz-stage" aria-live="polite">
+          <section class="start-panel" id="startPanel">
+            <p class="start-kicker">Ready To Practise</p>
+            <h2 class="start-title">Choose the setup above, then start the Latin test.</h2>
+            <p class="start-copy">
+              This version only uses checklist 9 and checklist 10 vocabulary.
+              The first question appears after you press start, and progress stays saved on this device.
+            </p>
+            <p class="start-summary" id="startSummary"></p>
+            <div class="start-actions">
+              <button type="button" class="primary-btn" id="startBtn">Start test</button>
+              <span class="start-note">Tip: start with one checklist, then switch to mixed when it feels comfortable.</span>
+            </div>
+          </section>
+
+          <div id="quizContent" class="hidden">
+            <div class="question-header">
+              <div class="badge-row">
+                <span class="badge" id="setBadge">Checklist 9</span>
+                <span class="badge" id="directionBadge">English -> Latin</span>
+                <span class="badge" id="answerBadge">Typing</span>
+              </div>
+              <p class="prompt-label">Translate this:</p>
+              <h2 class="prompt" id="promptText">Loading...</h2>
+              <p class="prompt-hint" id="promptHint"></p>
+            </div>
+
+            <div id="typingPanel">
+              <form id="typingForm" autocomplete="off">
+                <label class="input-label" for="answerInput">Your answer</label>
+                <input id="answerInput" name="answer" type="text" spellcheck="false" autocomplete="off">
+                <div class="input-actions">
+                  <button type="submit" class="primary-btn" id="checkBtn">Check answer</button>
+                  <button type="button" class="ghost-btn" id="giveUpBtn">I give up</button>
+                </div>
+              </form>
+            </div>
+
+            <div id="multipleChoicePanel" class="hidden">
+              <div class="options-grid" id="optionsGrid"></div>
+              <div class="input-actions mc-actions">
+                <button type="button" class="ghost-btn" id="giveUpMcBtn">I give up</button>
+              </div>
+            </div>
+
+            <section id="feedbackPanel" class="feedback hidden">
+              <h3 id="feedbackTitle">Correct</h3>
+              <p id="feedbackBody"></p>
+              <p id="feedbackMeta"></p>
+            </section>
+
+            <div class="stage-actions">
+              <button type="button" class="ghost-btn" id="skipBtn">Skip</button>
+              <button type="button" class="primary-btn hidden" id="nextBtn">Next question</button>
+            </div>
+          </div>
+        </section>
+
+        <aside class="insights-panel">
+          <section class="insight-card">
+            <h3>How this test works</h3>
+            <p>
+              Missed words come back sooner. Verb pairs can be answered
+              with the first Latin form on its own or with both forms together.
+            </p>
+          </section>
+
+          <section class="insight-card">
+            <h3>Hardest words</h3>
+            <ol id="hardList" class="rank-list"></ol>
+          </section>
+
+          <section class="insight-card">
+            <h3>Recent misses</h3>
+            <ul id="mistakeList" class="mistake-list"></ul>
+          </section>
+        </aside>
+      </main>
+    </div>
+  </body>
+</html>
