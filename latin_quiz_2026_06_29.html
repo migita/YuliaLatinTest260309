@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latin Vocabulary Test — 29 June 2026</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+      window.QUIZ_CONFIG = {
+        storageKey: "latin-2026-06-29-quiz-v1",
+        setLabels: {
+          all: "All words",
+          verbs: "Verbs",
+          nouns: "Nouns",
+          other: "Other words",
+        },
+        defaultSettings: {
+          direction: "mixed",
+          answerMode: "mixed",
+          setMode: "all",
+        },
+        buildCards: ({ word }) => [
+          // Verbs (3rd person singular present)
+          word("verbs", "amittit", "loses"),
+          word("verbs", "complet", "fills", {
+            englishAnswers: ["fills", "completes", "fills up", "fills it", "fills it up"],
+          }),
+          word("verbs", "custodit", "guards", {
+            englishAnswers: ["guards", "protects", "watches over"],
+          }),
+          word("verbs", "fugit", "runs away", {
+            englishAnswers: ["runs away", "flees", "runs off", "escapes", "runs"],
+          }),
+          word("verbs", "iacet", "lies", {
+            englishAnswers: ["lies", "is lying", "lies down", "lies there", "is lying down"],
+          }),
+          word("verbs", "mittit", "sends"),
+          word("verbs", "sentit", "feels", {
+            englishAnswers: ["feels", "notices", "senses", "perceives"],
+          }),
+          word("verbs", "timet", "fears", {
+            englishAnswers: ["fears", "is afraid", "is afraid of", "is scared", "is frightened"],
+          }),
+
+          // Nouns
+          word("nouns", "epistula", "letter"),
+          word("nouns", "flamma", "flame", {
+            englishAnswers: ["flame", "blaze", "fire"],
+          }),
+          word("nouns", "fundus", "farm", {
+            englishAnswers: ["farm", "estate"],
+          }),
+          word("nouns", "mons", "mountain", {
+            englishAnswers: ["mountain", "mount"],
+          }),
+          word("nouns", "templum", "temple"),
+          word("nouns", "terra", "ground", {
+            englishAnswers: ["ground", "land", "earth"],
+          }),
+
+          // Adjectives, adverbs and other words
+          word("other", "bonus", "good"),
+          word("other", "mirabilis", "strange", {
+            englishAnswers: ["strange", "wonderful", "marvellous", "marvelous", "amazing", "extraordinary"],
+          }),
+          word("other", "fortiter", "bravely", {
+            englishAnswers: ["bravely", "strongly"],
+          }),
+          word("other", "frustra", "in vain", {
+            englishAnswers: ["in vain", "without success", "for nothing"],
+          }),
+          word("other", "iam", "now", {
+            englishAnswers: ["now", "already"],
+          }),
+          word("other", "optime", "very well", {
+            englishAnswers: ["very well", "excellently", "extremely well", "best"],
+          }),
+          word("other", "paene", "nearly", {
+            englishAnswers: ["nearly", "almost"],
+          }),
+          word("other", "tandem", "at last", {
+            englishAnswers: ["at last", "finally", "at length"],
+          }),
+        ],
+      };
+    </script>
+    <script defer src="app.js"></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <p class="eyebrow">Year 7 Latin Revision</p>
+        <h1>Latin Vocab Test Lab</h1>
+        <p class="hero-copy">
+          A Latin-only test built from the newest vocabulary sheet, added 29 June 2026 —
+          22 words covering verbs, nouns, and describing words. Progress is saved in your browser,
+          weaker words come back more often, and typing ignores macrons and most punctuation.
+        </p>
+      </header>
+
+      <section class="control-panel" aria-label="Quiz controls">
+        <div class="control-group">
+          <span class="control-label">Direction</span>
+          <div class="segmented" id="directionControls">
+            <button type="button" class="seg-btn" data-setting="direction" data-value="en-la">English -> Latin</button>
+            <button type="button" class="seg-btn" data-setting="direction" data-value="la-en">Latin -> English</button>
+            <button type="button" class="seg-btn" data-setting="direction" data-value="mixed">Mixed</button>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <span class="control-label">Answer style</span>
+          <div class="segmented" id="answerControls">
+            <button type="button" class="seg-btn" data-setting="answerMode" data-value="typing">Typing</button>
+            <button type="button" class="seg-btn" data-setting="answerMode" data-value="multiple-choice">Multiple choice</button>
+            <button type="button" class="seg-btn" data-setting="answerMode" data-value="mixed">Mixed</button>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <span class="control-label">Word type</span>
+          <div class="segmented" id="setControls">
+            <button type="button" class="seg-btn" data-setting="setMode" data-value="all">All words</button>
+            <button type="button" class="seg-btn" data-setting="setMode" data-value="verbs">Verbs</button>
+            <button type="button" class="seg-btn" data-setting="setMode" data-value="nouns">Nouns</button>
+            <button type="button" class="seg-btn" data-setting="setMode" data-value="other">Other</button>
+          </div>
+        </div>
+
+        <div class="control-group action-group">
+          <button type="button" class="ghost-btn" id="resetProgressBtn">Reset saved progress</button>
+        </div>
+      </section>
+
+      <section class="stats-grid" aria-label="Progress overview">
+        <article class="stat-card">
+          <span class="stat-label">Answered</span>
+          <strong class="stat-value" id="answeredValue">0</strong>
+          <span class="stat-detail">Lifetime total</span>
+        </article>
+        <article class="stat-card">
+          <span class="stat-label">Accuracy</span>
+          <strong class="stat-value" id="accuracyValue">0%</strong>
+          <span class="stat-detail" id="accuracyDetail">No answers yet</span>
+        </article>
+        <article class="stat-card">
+          <span class="stat-label">Current streak</span>
+          <strong class="stat-value" id="streakValue">0</strong>
+          <span class="stat-detail">Correct answers in a row</span>
+        </article>
+        <article class="stat-card">
+          <span class="stat-label">Needs review</span>
+          <strong class="stat-value" id="reviewValue">0</strong>
+          <span class="stat-detail">Words with extra error weight</span>
+        </article>
+      </section>
+
+      <main class="workspace">
+        <section class="quiz-stage" aria-live="polite">
+          <section class="start-panel" id="startPanel">
+            <p class="start-kicker">Ready To Practise</p>
+            <h2 class="start-title">Choose the setup above, then start the Latin test.</h2>
+            <p class="start-copy">
+              This test uses the 22 words from the 29 June 2026 sheet. Use the word-type buttons
+              to drill just the verbs, nouns, or other words. The first question appears after you
+              press start, and progress stays saved on this device.
+            </p>
+            <p class="start-summary" id="startSummary"></p>
+            <div class="start-actions">
+              <button type="button" class="primary-btn" id="startBtn">Start test</button>
+              <span class="start-note">Tip: start with Latin -> English to learn the meanings, then switch to English -> Latin for spelling.</span>
+            </div>
+          </section>
+
+          <div id="quizContent" class="hidden">
+            <div class="question-header">
+              <div class="badge-row">
+                <span class="badge" id="setBadge">All words</span>
+                <span class="badge" id="directionBadge">English -> Latin</span>
+                <span class="badge" id="answerBadge">Typing</span>
+              </div>
+              <p class="prompt-label">Translate this:</p>
+              <h2 class="prompt" id="promptText">Loading...</h2>
+              <p class="prompt-hint" id="promptHint"></p>
+            </div>
+
+            <div id="typingPanel">
+              <form id="typingForm" autocomplete="off">
+                <label class="input-label" for="answerInput">Your answer</label>
+                <input id="answerInput" name="answer" type="text" spellcheck="false" autocomplete="off">
+                <div class="input-actions">
+                  <button type="submit" class="primary-btn" id="checkBtn">Check answer</button>
+                  <button type="button" class="ghost-btn" id="giveUpBtn">I give up</button>
+                </div>
+              </form>
+            </div>
+
+            <div id="multipleChoicePanel" class="hidden">
+              <div class="options-grid" id="optionsGrid"></div>
+              <div class="input-actions mc-actions">
+                <button type="button" class="ghost-btn" id="giveUpMcBtn">I give up</button>
+              </div>
+            </div>
+
+            <section id="feedbackPanel" class="feedback hidden">
+              <h3 id="feedbackTitle">Correct</h3>
+              <p id="feedbackBody"></p>
+              <p id="feedbackMeta"></p>
+            </section>
+
+            <div class="stage-actions">
+              <button type="button" class="ghost-btn" id="skipBtn">Skip</button>
+              <button type="button" class="primary-btn hidden" id="nextBtn">Next question</button>
+            </div>
+          </div>
+        </section>
+
+        <aside class="insights-panel">
+          <section class="insight-card">
+            <h3>How this test works</h3>
+            <p>
+              Missed words come back sooner, and you can focus on just the verbs, nouns, or
+              other words using the buttons above. Multiple-choice options are drawn from the
+              same word type to keep them challenging.
+            </p>
+          </section>
+
+          <section class="insight-card">
+            <h3>Hardest words</h3>
+            <ol id="hardList" class="rank-list"></ol>
+          </section>
+
+          <section class="insight-card">
+            <h3>Recent misses</h3>
+            <ul id="mistakeList" class="mistake-list"></ul>
+          </section>
+        </aside>
+      </main>
+    </div>
+  </body>
+</html>

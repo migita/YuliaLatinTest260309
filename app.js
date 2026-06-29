@@ -1,4 +1,5 @@
-const STORAGE_KEY = "latin-checklists-6-7-quiz-v1";
+const CONFIG = (typeof window !== "undefined" && window.QUIZ_CONFIG) ? window.QUIZ_CONFIG : {};
+const STORAGE_KEY = CONFIG.storageKey || "latin-checklists-6-7-quiz-v1";
 const RECENT_CARD_WINDOW = 4;
 const RECENT_KEY_WINDOW = 8;
 const MAX_MISTAKES = 8;
@@ -6,7 +7,7 @@ const RETRY_DELAY_MIN = 2;
 const RETRY_DELAY_MAX = 3;
 const CHOICE_COUNT = 4;
 
-const CARDS = [
+const DEFAULT_CARDS = [
   word("checklist-6", "abest", "is out / is absent", {
     englishAnswers: ["is out", "is absent", "is out is absent"],
   }),
@@ -83,6 +84,10 @@ const CARDS = [
   }),
 ];
 
+const CARDS = typeof CONFIG.buildCards === "function"
+  ? CONFIG.buildCards({ word, pairWord })
+  : DEFAULT_CARDS;
+
 const state = loadState();
 let currentQuestion = null;
 let quizStarted = false;
@@ -153,6 +158,7 @@ function loadState() {
       direction: "mixed",
       answerMode: "mixed",
       setMode: "all",
+      ...(CONFIG.defaultSettings || {}),
     },
     stats: {},
     retryQueue: [],
@@ -348,11 +354,12 @@ function labelForAnswerMode(value) {
 }
 
 function labelForSet(value) {
-  return {
+  const labels = CONFIG.setLabels || {
     all: "All words",
     "checklist-6": "Checklist 6",
     "checklist-7": "Checklist 7",
-  }[value] || value;
+  };
+  return labels[value] || value;
 }
 
 function refreshDashboard() {
