@@ -40,7 +40,7 @@
     }
   </style>
   <script defer src="mandarin_hobbies_core.js"></script>
-  <script defer src="mandarin_hobbies_app.js"></script>
+  <script defer src="mandarin_hobbies_app.js?v=2"></script>
 </head>
 <body>
   <div class="page-shell">
@@ -69,8 +69,8 @@
       </div>
       <div class="control-group">
         <span class="control-label">Pinyin tones</span>
-        <label class="tone-setting"><input type="checkbox" id="checkTones" checked> Check tones</label>
-        <p class="settings-note">Use tone marks or numbers: mǎ = ma3. Turn off to practise spelling first.</p>
+        <label class="tone-setting"><input type="checkbox" id="checkTones"> Check tones</label>
+        <p class="settings-note">Optional. Leave off to type plain letters. With tones on, mǎ = ma3.</p>
       </div>
     </section>
 
@@ -149,7 +149,7 @@
         </section>
         <section class="insight-card">
           <h3>Pinyin help</h3>
-          <p>Type accents or add a tone number after each syllable. Neutral tones need no number (0 or 5 also works). Spaces and capitals do not matter. Correct answers use the spelling on your sheet.</p>
+          <p>Plain letters are fine; spaces and capitals do not matter. For tone practice, turn on Check tones and use accents or a number after each syllable. Answers still show the tone marks from your sheet.</p>
         </section>
         <button type="button" class="ghost-btn" id="resetBtn">Reset saved progress</button>
       </aside>

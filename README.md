@@ -7,8 +7,10 @@ The [test picker](https://migita.github.io/YuliaLatinTest260309/) contains Yulia
 Open [`mandarin_hobbies_quiz.html`](https://migita.github.io/YuliaLatinTest260309/mandarin_hobbies_quiz.html).
 All 25 entries are transcribed from the supplied vocabulary sheet. Every prompt shows Hanzi;
 the default round tests both pinyin and English (50 questions), with single-skill rounds available.
-Answers can be typed or written on paper and self-checked. Tone marks and numbered pinyin are accepted;
-tones are checked by default. Neutral tones may be unnumbered, 0, or 5. The sheet's `xǐ huān`
+Answers can be typed or written on paper and self-checked. Pinyin ignores tones by default, so ordinary
+letters work. Enable **Check tones** for tone practice; accents and numbered pinyin are accepted.
+The new default also applies once to existing browsers, preserving progress and later explicit choices.
+Neutral tones may be unnumbered, 0, or 5. The sheet's `xǐ huān`
 and the usual neutral-tone `xǐ huan` are both accepted. English accepts listed equivalents.
 
 Each missed question returns once during the round. First-attempt scores remain separate from

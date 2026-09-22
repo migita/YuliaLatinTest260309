@@ -2,14 +2,16 @@
   "use strict";
   const { CARDS, checkAnswer, questions, newRound, takeNext, scheduleRetry } = window.MandarinHobbies;
   const STORAGE_KEY = "mandarin-jinbu1-hobbies-v1";
-  const defaults = { mode: "both", answerMode: "typing", checkTones: true };
+  const defaults = { mode: "both", answerMode: "typing", checkTones: false };
   const cardById = Object.fromEntries(CARDS.map(card => [card.id, card]));
   const $ = id => document.getElementById(id);
   const show = (id, visible) => $(id).classList.toggle("hidden", !visible);
   const label = skill => skill === "pinyin" ? "Pinyin" : "English";
   let saved = {};
   try { saved = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch (_) { /* Use fresh progress. */ }
-  const state = { settings: { ...defaults, ...saved.settings }, stats: saved.stats || {}, streak: saved.streak || 0 };
+  const state = { settings: { ...defaults, ...saved.settings }, stats: saved.stats || {}, streak: saved.streak || 0, toneOptionVersion: 1 };
+  // Replace the original strict default once, then remember explicit choices.
+  if (saved.toneOptionVersion !== 1) state.settings.checkTones = false;
   if (!["both", "pinyin", "english"].includes(state.settings.mode)) state.settings.mode = "both";
   if (!["typing", "paper"].includes(state.settings.answerMode)) state.settings.answerMode = "typing";
   let round = null;
@@ -201,5 +203,6 @@
     show("startPanel", true);
     refresh();
   });
+  save();
   refresh();
 })();
