@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mandarin Hobbies — Yulia's Test</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    @font-face { font-family: "Mandarin Hobbies Hanzi"; src: url("fonts/mandarin-hobbies-hanzi.woff") format("woff"); font-style: normal; font-weight: 400; font-display: swap; }
+    .back-link { display: inline-block; margin-bottom: 1rem; color: var(--accent); }
+    .hero-copy { max-width: 48rem; }
+    .start-title { max-width: 22ch; line-height: 1.15; }
+    .control-panel { grid-template-columns: 1.2fr 1fr 1fr; }
+    .stats-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    [lang="zh-Hans"], .prompt.hanzi { font-family: "PingFang SC", "Microsoft YaHei", "Mandarin Hobbies Hanzi", "Noto Sans CJK SC", sans-serif; }
+    .prompt.hanzi { font-size: clamp(2.6rem, 6vw, 4rem); line-height: 1.5; overflow-wrap: anywhere; }
+    .prompt-label { margin-bottom: 0; }
+    .input-label { display: block; }
+    .tone-setting { display: flex; align-items: center; gap: .5rem; line-height: 1.5; }
+    .tone-setting input { width: 20px; height: 20px; }
+    .muted { color: var(--muted); line-height: 1.6; }
+    .answer-reveal { font-size: 1.4rem; overflow-wrap: anywhere; }
+    .answer-reveal[lang="zh-Latn"] { font-size: 1.6rem; }
+    .feedback.good h3 { color: var(--good); }
+    .feedback.bad h3 { color: var(--bad); }
+    button:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+    button:disabled { opacity: .5; cursor: default; transform: none; }
+    .round-progress { width: 100%; margin: .2rem 0 1.2rem; accent-color: var(--accent); }
+    .review-row { display: flex; justify-content: space-between; gap: 1rem; margin: .6rem 0; }
+    .review-row span:first-child { font-size: 1.3rem; }
+    .summary-score { font-size: 2rem; font-weight: 800; }
+    .paper-actions { margin-top: 1rem; }
+    .settings-note { font-size: .85rem; margin: 0; color: var(--muted); }
+    @media (max-width: 980px) { .control-panel { grid-template-columns: 1fr; } }
+    @media (max-width: 640px) {
+      .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .6rem; }
+      .stat-card { padding: .9rem; }
+      .workspace { grid-template-columns: minmax(0, 1fr); }
+      .seg-btn { padding: .7rem .8rem; }
+    }
+  </style>
+  <script defer src="mandarin_hobbies_core.js"></script>
+  <script defer src="mandarin_hobbies_app.js"></script>
+</head>
+<body>
+  <div class="page-shell">
+    <a class="back-link" href="index.html">← All tests</a>
+    <header class="hero">
+      <p class="eyebrow">Jinbu 1 · Chapter 3</p>
+      <h1>Mandarin Hobbies</h1>
+      <p class="hero-copy">Look at the Hanzi. Give the pinyin or the English meaning, one question at a time. All 25 words and phrases from your vocabulary sheet are here.</p>
+    </header>
+
+    <section class="control-panel" aria-label="Test settings">
+      <div class="control-group">
+        <span class="control-label" id="skillLabel">What to practise</span>
+        <div class="segmented" role="group" aria-labelledby="skillLabel">
+          <button type="button" class="seg-btn" data-setting="mode" data-value="both">Pinyin + English</button>
+          <button type="button" class="seg-btn" data-setting="mode" data-value="pinyin">Pinyin</button>
+          <button type="button" class="seg-btn" data-setting="mode" data-value="english">English</button>
+        </div>
+      </div>
+      <div class="control-group">
+        <span class="control-label" id="styleLabel">Your answer</span>
+        <div class="segmented" role="group" aria-labelledby="styleLabel">
+          <button type="button" class="seg-btn" data-setting="answerMode" data-value="typing">Type</button>
+          <button type="button" class="seg-btn" data-setting="answerMode" data-value="paper">Write on paper</button>
+        </div>
+      </div>
+      <div class="control-group">
+        <span class="control-label">Pinyin tones</span>
+        <label class="tone-setting"><input type="checkbox" id="checkTones" checked> Check tones</label>
+        <p class="settings-note">Use tone marks or numbers: mǎ = ma3. Turn off to practise spelling first.</p>
+      </div>
+    </section>
+
+    <section class="stats-grid" aria-label="Saved progress">
+      <article class="stat-card"><span class="stat-label">Typed answers</span><strong class="stat-value" id="answeredValue">0</strong><span class="stat-detail">Saved on this device</span></article>
+      <article class="stat-card"><span class="stat-label">Accuracy</span><strong class="stat-value" id="accuracyValue">—</strong><span class="stat-detail">Typed answers only</span></article>
+      <article class="stat-card"><span class="stat-label">Current streak</span><strong class="stat-value" id="streakValue">0</strong><span class="stat-detail">Correct typed answers</span></article>
+      <article class="stat-card"><span class="stat-label">Needs review</span><strong class="stat-value" id="reviewValue">0</strong><span class="stat-detail">Pinyin and English separately</span></article>
+    </section>
+
+    <main class="workspace">
+      <section class="quiz-stage" aria-label="Mandarin test">
+        <section class="start-panel" id="startPanel">
+          <p class="start-kicker">Ready to practise</p>
+          <h2 class="start-title">Read the characters. Recall the answer.</h2>
+          <p class="start-copy">Choose both skills for a complete test: 25 pinyin questions and 25 English questions. Missed answers come back later for another try.</p>
+          <p class="start-summary" id="startSummary"></p>
+          <div class="start-actions">
+            <button type="button" class="primary-btn" id="startBtn">Start test</button>
+            <button type="button" class="ghost-btn" id="reviewBtn">Practise mistakes</button>
+          </div>
+        </section>
+
+        <div id="quizContent" class="hidden">
+          <div class="badge-row"><span class="badge" id="directionBadge"></span><span class="badge" id="progressBadge"></span></div>
+          <progress class="round-progress" id="roundProgress" value="0" max="50" aria-label="First attempts completed"></progress>
+          <p class="prompt-label" id="promptLabel"></p>
+          <h2 class="prompt hanzi" id="promptText" lang="zh-Hans"></h2>
+          <p class="prompt-hint" id="promptHint"></p>
+          <form id="typingForm" autocomplete="off">
+            <label class="input-label" id="answerLabel" for="answerInput">Your answer</label>
+            <input id="answerInput" name="answer" type="text" spellcheck="false" autocomplete="off" autocapitalize="none" autocorrect="off" aria-describedby="promptHint">
+            <div class="input-actions">
+              <button type="submit" class="primary-btn" id="checkBtn">Check answer</button>
+              <button type="button" class="ghost-btn" id="giveUpBtn">Show answer</button>
+            </div>
+          </form>
+          <div id="paperPanel" class="paper-actions hidden">
+            <p class="muted">Write your answer on paper, then reveal it and check your work.</p>
+            <button type="button" class="primary-btn" id="revealPaperBtn">Show answer</button>
+          </div>
+          <section id="feedbackPanel" class="feedback hidden" aria-live="polite" aria-atomic="true">
+            <h3 id="feedbackTitle"></h3>
+            <p id="feedbackBody" class="answer-reveal"></p>
+            <p id="feedbackNote"></p>
+          </section>
+          <div id="selfMarkPanel" class="input-actions hidden">
+            <button type="button" class="primary-btn" id="selfRightBtn">I got it right</button>
+            <button type="button" class="ghost-btn" id="selfWrongBtn">I need another try</button>
+          </div>
+          <div class="stage-actions"><button type="button" class="primary-btn hidden" id="nextBtn">Next question</button></div>
+          <div class="stage-actions"><button type="button" class="ghost-btn" id="endBtn">Finish for now</button></div>
+        </div>
+
+        <section id="summaryPanel" class="hidden" tabindex="-1">
+          <p class="start-kicker" id="summaryTitle">Test complete</p>
+          <h2>Here's how you did</h2>
+          <p class="summary-score" id="summaryScore"></p>
+          <p class="muted" id="summaryDetail"></p>
+          <p class="muted" id="summarySkills"></p>
+          <div class="start-actions">
+            <button type="button" class="primary-btn" id="restartBtn">Repeat test</button>
+            <button type="button" class="ghost-btn" id="retryBtn">Practise mistakes</button>
+          </div>
+        </section>
+      </section>
+
+      <aside class="insights-panel">
+        <section class="insight-card">
+          <h3>How it works</h3>
+          <p>Hanzi is always the question. Pinyin and English are checked separately. Misses return later; first-attempt scores stay separate from retries. Your progress is saved in this browser.</p>
+        </section>
+        <section class="insight-card">
+          <h3>Needs another look</h3>
+          <div id="reviewList"></div>
+        </section>
+        <section class="insight-card">
+          <h3>Pinyin help</h3>
+          <p>Type accents or add a tone number after each syllable. Neutral tones need no number (0 or 5 also works). Spaces and capitals do not matter. Correct answers use the spelling on your sheet.</p>
+        </section>
+        <button type="button" class="ghost-btn" id="resetBtn">Reset saved progress</button>
+      </aside>
+    </main>
+  </div>
+</body>
+</html>
