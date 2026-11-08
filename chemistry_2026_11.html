@@ -151,7 +151,7 @@ if(x.type==="mc"){const sel=document.querySelector('input[name="answer"]:checked
 return $("typedAnswer").value.trim();
 }
 function grade(item,r){
-if(item.type==="self")return null;
+if(item.type==="self")return r.trim()?null:0;
 if(item.type==="mc")return r===item.answer?1:0;
 if(item.type==="number")return r!==""&&Number.isFinite(Number(r))&&Math.abs(Number(r)-Number(item.answer))<0.000001?1:0;
 if(item.type==="short")return item.accepted.some(a=>norm(a)===norm(r))&&r!==""?1:0;
@@ -197,7 +197,7 @@ current.forEach((x,i)=>{
  const status=marks[i]===null?"pending":marks[i]===1?"correct":"wrong";
  output+='<article class="review '+status+'"><div class="tag">Q'+(i+1)+' · '+safe(topicName(x.topic))+'</div><p><strong>'+safe(x.prompt)+'</strong></p>';
  output+='<p><span class="muted">Your answer:</span> '+safe(answers[i]||"(blank)")+'</p><p><span class="muted">Model answer:</span> <strong>'+safe(x.answer)+'</strong></p><p class="muted">'+safe(x.explain)+'</p>';
- if(x.type==="self"){output+='<div class="buttons"><button class="'+(marks[i]===1?"secondary":"")+'" data-mark="'+i+'" data-value="1" aria-label="Mark question '+(i+1)+' correct">Correct</button><button class="'+(marks[i]===0?"secondary":"")+'" data-mark="'+i+'" data-value="0" aria-label="Mark question '+(i+1)+' needs work">Needs work</button></div>';}
+ if(x.type==="self" && String(answers[i]).trim()){output+='<div class="buttons"><button class="'+(marks[i]===1?"secondary":"")+'" data-mark="'+i+'" data-value="1" aria-label="Mark question '+(i+1)+' correct">Correct</button><button class="'+(marks[i]===0?"secondary":"")+'" data-mark="'+i+'" data-value="0" aria-label="Mark question '+(i+1)+' needs work">Needs work</button></div>';}
  output+='</article>';
 });
 output+='<div class="controls"><button class="primary" id="again">Back to revision menu</button><button id="retryMissed" '+(pending?"disabled":"")+'>Repeat missed questions</button></div><p class="note">For self-marked questions, award the mark only if your explanation includes the key scientific idea. Unanswered or skipped objective questions score zero.</p>';
