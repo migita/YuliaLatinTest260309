@@ -14,6 +14,7 @@
         --french: #1f63d6;
         --latin: #9e2f3b;
         --mandarin: #0f766e;
+        --chemistry: #0d7872;
         --shadow: 0 24px 60px rgba(23, 32, 51, 0.16);
         --radius: 28px;
       }
@@ -109,6 +110,16 @@
         border-color: rgba(158, 47, 59, 0.26);
         background: rgba(255, 244, 241, 0.96);
       }
+
+      .choice.chemistry:hover {
+        border-color: rgba(13, 120, 114, 0.28);
+        background: rgba(238, 252, 247, 0.96);
+      }
+      .choice.chemistry .choice-kicker {
+        color: var(--chemistry);
+        background: rgba(13, 120, 114, 0.12);
+      }
+      .choice.chemistry .meta { color: var(--chemistry); }
 
       .choice.mandarin:hover {
         border-color: rgba(15, 118, 110, 0.28);
@@ -208,12 +219,20 @@
         <p class="eyebrow">Subject Picker</p>
         <h1>Choose The Test First</h1>
         <p class="hero-copy">
-          Choose a Mandarin, French, or Latin test. The newest Mandarin test covers
-          Jinbu 1 Chapter 3 Hobbies: read the Hanzi and recall the pinyin and English meaning.
+          Choose a chemistry, Mandarin, French or Latin test. The new chemistry revision covers
+          the eight topics in the Year 7 elements, compounds and mixtures checklist.
         </p>
       </section>
 
       <section class="choices" aria-label="Available tests">
+        <a class="choice chemistry" href="chemistry_2026_11.html">
+          <span class="choice-kicker">Chemistry · New</span>
+          <strong>Elements &amp; Compounds</strong>
+          <p>Highgate Year 7 revision: 32-question mock exam, 101-question bank, hazard and particle diagrams, word equations, conservation of mass, decomposition and explanations.</p>
+          <span class="meta">Open chemistry revision test</span>
+        </a>
+
+        
         <a class="choice mandarin" href="mandarin_hobbies_quiz.html">
           <span class="choice-kicker">Mandarin · New</span>
           <strong>Mandarin Hobbies</strong>
