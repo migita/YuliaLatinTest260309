@@ -26,3 +26,21 @@ Run the answer-matching and round-behaviour checks with:
 ```sh
 node --test mandarin_hobbies.test.cjs
 ```
+
+## Biology: Bacteria & Photosynthesis
+
+Open [the biology quiz](https://migita.github.io/YuliaLatinTest260309/biology_quiz.html).
+36 English questions: all 14 labelled worksheet clues (typed recall) and 22
+multiple-choice applications, with explanations, first-attempt round scores and
+separate mistake-only practice. Worksheet-only rounds are available. Only mistake
+IDs persist locally; no personal information, photos, analytics or remote dependencies
+were added. The page reuses the existing shared styles and quiz/landing patterns.
+
+Across 7 is explicitly clarified to distinguish pasteurisation from sterilisation;
+the cell-wall and DNA clues are qualified to avoid implying every bacterium is identical.
+
+Tests: node --test biology.test.cjs mandarin_hobbies.test.cjs.
+Browser regression: node biology.browser-test.cjs with an installed Playwright;
+optionally set PLAYWRIGHT_MODULE to its module path and CHROME_PATH to a Chromium
+executable. It checks complete mobile/desktop rounds, scoring, blank validation,
+retry clearing, saved mistakes, early finish and the landing link.
