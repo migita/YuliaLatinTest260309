@@ -1,6 +1,6 @@
 # Mandarin complete test — source coverage
 
-All three original photos directly inspected on 17 November 2026. No photographs published.
+All three original photos directly inspected on 17 November 2026. Original photographs were subsequently added at the user’s explicit request: [source folder and page mapping](sources/mandarin-hobbies/README.md).
 
 P1: hobbies table, 25 rows. P2: three opinion words, 17 sports rows, week and Monday–Wednesday, 24 rows. P3: Thursday–Sunday, yesterday/today/tomorrow, 是, 天天, 10 rows, plus negatives and visible STA heading. 59 printed rows; 57 distinct entries because 今天 and 是 repeat.
 
