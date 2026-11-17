@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mandarin — Jinbu 1 Chapter 3: Hobbies</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="mandarin_hobbies_core.js"></script>
+  <script defer src="mandarin_hobbies_full_app.js"></script>
+  <style>
+    [hidden] { display: none !important; }
+    @font-face {font-family: "Full Mandarin"; src:url("fonts/mandarin-full-hanzi.ttf") format("truetype"); font-display:swap;}
+    body { font-family: "Full Mandarin", "Avenir Next", "Trebuchet MS", "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; }
+    .page-shell { max-width: 980px; }
+    .quiz-stage { margin-top: 1.25rem; }
+    .prompt { font-family: inherit; font-size: clamp(1.45rem, 4vw, 2.2rem); line-height: 1.5; overflow-wrap: anywhere; }
+    button { min-height: 48px; touch-action: manipulation; }
+    button:focus-visible, a:focus-visible, select:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+    button:disabled { cursor: default; }
+    select { font: inherit; max-width: 100%; padding: .8rem; border: 1px solid var(--line); border-radius: 12px; background: white; }
+    progress { width: 100%; height: 12px; accent-color: var(--accent); }
+    .token-row { display: flex; flex-wrap: wrap; gap: .6rem; margin: 1rem 0; }
+    .sentence { min-height: 72px; padding: .8rem; border: 2px dashed var(--line); border-radius: 16px; }
+    .sentence:empty::before { content: 'Tap the words below to build your sentence.'; color: var(--muted); }
+    .review-item { margin: 1rem 0; line-height: 1.7; overflow-wrap: anywhere; }
+    .back { display: inline-block; margin-bottom: 1rem; color: var(--accent); }
+    .subtle { color: var(--muted); line-height: 1.6; }
+    #notice { color: var(--bad); }
+  </style>
+</head>
+<body>
+<main class="page-shell">
+  <a class="back" href="index.html">← All tests</a> · <a href="mandarin_hobbies_quiz.html">Original 25-word vocabulary practice</a>
+  <header class="hero">
+    <p class="eyebrow">Mandarin revision · Jinbu 1 · Chapter 3</p>
+    <h1>Complete Hobbies Test</h1>
+    <p class="hero-copy">Practise hobbies, sports, days and sentence patterns from your three revision sheets. English instructions, Chinese practice — one question at a time.</p>
+  </header>
+  <section class="quiz-stage" id="setup">
+    <h2>All three photos, not just vocabulary</h2><p>57 distinct vocabulary entries, plus grammar, sentence building and reading. Repeated 今天 and 是 rows are covered once each. Photo 3 cuts off after the Subject + Time + Action heading; unseen material is not claimed.</p>
+    <p class="subtle">Mix multiple choice, typed pinyin, English answers and tap-to-build Chinese sentences. No Chinese keyboard needed. Each question is worth one mark; feedback appears after each answer.</p>
+    <div class="control-group">
+      <label for="topic" class="control-label">Choose your practice</label>
+      <select id="topic">
+        <option value="all">Full chapter</option>
+        <option value="Hobbies">Hobbies and opinions</option>
+        <option value="Sports">Sports and ability</option>
+        <option value="Days">Days and time</option>
+        <option value="Grammar">Sentence building and grammar</option>
+      </select>
+    </div>
+    <p id="questionCount" class="start-summary"></p>
+    <button class="primary-btn" id="startBtn" type="button">Start test</button>
+    <p class="subtle">Answers stay on this page only. Nothing is sent or saved; reloading starts fresh.</p>
+  </section>
+  <section class="quiz-stage" id="quiz" hidden aria-label="Current question">
+    <div class="badge-row"><span class="badge" id="category"></span><span class="badge" id="mode"></span></div>
+    <p id="progressText"></p><progress id="progress" value="0" max="1" aria-label="Questions answered"></progress>
+    <h2 class="prompt" id="prompt" tabindex="-1"></h2>
+    <p class="prompt-hint" id="hint"></p>
+    <form id="answerForm" autocomplete="off">
+      <div id="choices" class="options-grid"></div>
+      <div id="typing" hidden><label for="answerInput" class="input-label">Your answer in English</label><input id="answerInput" name="answer" type="text" autocomplete="off" spellcheck="false" aria-describedby="hint notice"></div>
+      <div id="building" hidden><div id="sentence" class="token-row sentence" aria-label="Your sentence"></div><div id="tokens" class="token-row" aria-label="Available words"></div><button id="clearBtn" class="ghost-btn" type="button">Clear sentence</button></div>
+      <p id="notice" role="status"></p>
+      <div class="input-actions"><button id="checkBtn" class="primary-btn" type="submit">Check answer</button><button id="skipBtn" class="ghost-btn" type="button">Show answer / skip</button></div>
+    </form>
+    <section id="feedback" class="feedback" hidden role="status"><h3 id="feedbackTitle"></h3><p id="feedbackAnswer"></p><p id="explanation"></p></section>
+    <div class="stage-actions"><button id="nextBtn" class="primary-btn" type="button" hidden>Next question</button></div>
+  </section>
+  <section class="quiz-stage" id="results" hidden>
+    <h2 id="resultTitle" tabindex="-1">Round complete</h2><p class="prompt" id="score"></p><p id="resultMessage"></p>
+    <div class="input-actions"><button class="primary-btn" id="retryBtn" type="button">Retry mistakes</button><button class="ghost-btn" id="restartBtn" type="button">Restart this test</button><button class="ghost-btn" id="setupBtn" type="button">Choose another topic</button></div>
+    <h3 id="reviewHeading">Review your mistakes</h3><ol id="review"></ol>
+  </section>
+  <noscript><section class="quiz-stage">Please enable JavaScript to run this quiz.</section></noscript>
+</main>
+</body>
+</html>
